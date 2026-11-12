@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block title %}Edit game details{% endblock %}
+
+{% block content %}
+<h2>Edit details for <a href="/item/{{ item.id }}">{{ item.title }}</a></h2>
+<form action="/update_item" method="post">
+  <p>
+    <label for="title">Name of the game</label>: <br/>
+    <input type="text" name="title" id="title" maxlength="50" size="25" value="{{ item.title }}" required />
+  </p>
+  <input type="hidden" name="item_id" value="{{ item.id }}" />
+  <p>
+  {% for class in all_classes %}
+  <p>
+    <label for="class{{ class }}">{{ class }}</a>: <br />
+    <select name="classes" id="class{{ class}}">
+      <option value="">(select)</option>
+    {% for option in all_classes[class] %}
+      {% if classes[class] == option %}
+      <option value="{{ class }}:{{ option }}" selected>{{ option }}</option>
+      {% else %}
+      <option value="{{ class }}:{{ option }}">{{ option }}</option>
+      {% endif %}
+    {% endfor %}
+    </select>
+  </p>
+  {% endfor %}
+  <p>
+    <label>Difficulty level</label>: <br />
+    <input type="radio" name="difficulty_level" id="difficulty_none" value="Not rated" {% if item.difficulty_level == 'Not rated' %}checked{% endif %} />
+    <label for="difficulty_none"">Not rated</label>
+    <input type="radio" name="difficulty_level" id="difficulty_very_easy" value="Very easy" {% if item.difficulty_level == 'Very easy' %}checked{% endif %} />
+    <label for="difficulty_very_easy">Very easy</label>
+    <input type="radio" name="difficulty_level" id="difficulty_easy" value="Easy" {% if item.difficulty_level == 'Easy' %}checked{% endif %} />
+    <label for="difficulty_easy">Easy</label>
+    <input type="radio" name="difficulty_level" id="difficulty_medium" value="Medium" {% if item.difficulty_level == 'Medium' %}checked{% endif %} />
+    <label for="difficulty_medium">Medium</label>
+    <input type="radio" name="difficulty_level" id="difficulty_hard" value="Hard" {% if item.difficulty_level == 'Hard' %}checked{% endif %} />
+    <label for="difficulty_hard">Hard</label>
+    <input type="radio" name="difficulty_level" id="difficulty_very_hard" value="Very hard" {% if item.difficulty_level == 'Very hard' %}checked{% endif %} />
+    <label for="difficulty_very_hard">Very hard</label>
+  </p>
+
+  <p>
+    <label>Rating</label>: <br />
+    <input type="radio" name="rating" id="rating_none" value="Not rated" {% if item.rating == 'Not rated' %}checked{% endif %} />
+    <label for="rating_none">Not rated</label>
+    <input type="radio" name="rating" id="rating_1" value="*" {% if item.rating == '*' %}checked{% endif %} />
+    <label for="rating_1">*</label>
+    <input type="radio" name="rating" id="rating_2" value="**" {% if item.rating == '**' %}checked{% endif %} />
+    <label for="rating_2">**</label>
+    <input type="radio" name="rating" id="rating_3" value="***" {% if item.rating == '***' %}checked{% endif %} />
+    <label for="rating_3">***</label>
+    <input type="radio" name="rating" id="rating_4" value="****" {% if item.rating == '****' %}checked{% endif %} />
+    <label for="rating_4">****</label>
+    <input type="radio" name="rating" id="rating_5" value="*****" {% if item.rating == '*****' %}checked{% endif %} />
+    <label for="rating_5">*****</label>
+  </p>
+  <!--
+  FIXING FLAW 1: CSRF
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+  -->
+  <input type="submit" value="Update details" />
+  <input type="submit" name="back" value="Go back">
+</form>
+
+<p>
+  <a href="/item/{{ item.id }}">Back to game details</a>
+</p>
+{% endblock %}

@@ -1,0 +1,41 @@
+body {
+  margin: auto;
+  max-width: 50em;
+  font-family: sans-serif;
+  background-color: #e2f396;
+  color: #000000;
+  }
+
+.item{
+  border: 3px solid #000000;
+  margin: 1em;
+  padding: 0.2em 0.5em;
+  color: #000000;
+}
+
+.info {
+  border: 3px solid #000000;
+  margin: 1em;
+  padding: 0.5em;
+  background-color: #ffa091;
+  color: #000000;
+}
+
+.header {
+  padding: 1em;
+  margin: 0.5em 0;
+  background-color: #94eaaa;
+  color: #000000;
+}
+
+.nav {
+  padding: 1em;
+  margin: 0.5em 0;
+  background-color: #9cee9e;
+}
+
+.content {
+  padding: 1em;
+  margin: 0.5em 0;
+  background-color: #ffc792;
+}

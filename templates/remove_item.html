@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}Delete game's information{% endblock %}
+
+{% block content %}
+  <h2>Delete information of <a href="/item/{{ item.id }}">{{ item.title }} </a></h2>
+
+  <p>Are you sure you want to delete information of {{ item.title }}?</p>
+  <form action="/remove_item/{{ item.id }}" method="post">
+    <!--
+    FIXING FLAW 1: CSRF
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+    -->
+    <input type="submit" name="remove" value="Delete">
+    <input type="submit" name="back" value="Go back">
+  </form>
+<p>
+  <a href="/item/{{ item.id }}">Back to game details</a>
+</p>
+{% endblock %}

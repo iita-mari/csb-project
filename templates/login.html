@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}Log in{% endblock %}
+
+{% block content %}
+<h2>Log in</h2>
+
+<form action="/login" method="post">
+  <p>
+    <label for="username">Username</label>: <br />
+    <input type="text" name="username" id="username"/>
+  </p>
+  <p>
+    <label for="password">Password</label>: <br />
+    <input type="password" name="password" id="password" />
+  </p>
+
+  {% if next_page %}
+  <input type="hidden" name="next_page" value="{{ next_page }}" />
+  {% else %}
+  <input type="hidden" name="next_page" value="/" />
+  {% endif %}
+
+  <input type="submit" value="Log in" />
+</form>
+{% endblock %}

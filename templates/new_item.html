@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block title %}Add a new game{% endblock %}
+
+{% block content %}
+<h2>Add a new game</h2>
+
+<h3>Basic game information</h3>
+<form action="/create_item" method="post">
+  <p>
+    <label for="title">Name of the game:</label> <br />
+    <input type="text" name="title" id="title" maxlength="50" size="25" required />
+  </p>
+  {% for class in classes %}
+  <p>
+    <label for="class{{ class }}">{{ class }}</label>: <br />
+    <select name="classes" id="class{{ class }}">
+      <option value="">(select)</option>
+    {% for option in classes[class] %}
+      <option value="{{ class }}:{{ option }}">{{ option }}</option>
+    {% endfor %}
+    </select>
+  </p>
+  {% endfor %}
+
+  <h3>Game rating</h3>
+  <p>
+    <label>Difficulty level</label>: <br />
+    <input type="radio" name="difficulty_level" id="difficulty_none" value="Not rated" required />
+    <label for="difficulty_none">Not rated</label>
+    <input type="radio" name="difficulty_level" id="difficulty_very_easy" value="Very easy" />
+    <label for="difficulty_very_easy">Very easy</label>
+    <input type="radio" name="difficulty_level" id="difficulty_easy" value="Easy" />
+    <label for="difficulty_easy">Easy</label>
+    <input type="radio" name="difficulty_level" id="difficulty_medium" value="Medium" />
+    <label for="difficulty_medium">Medium</label>
+    <input type="radio" name="difficulty_level" id="difficulty_hard" value="Hard" />
+    <label for="difficulty_hard">Hard</label>
+    <input type="radio" name="difficulty_level" id="difficulty_very_hard" value="Very hard" />
+    <label for="difficulty_very_hard">Very hard</label>
+  </p>
+  <p>
+    <label>Rating</label>: <br />
+    <input type="radio" name="rating" id="rating_none" value="Not rated" required />
+    <label for="rating_none">Not rated</label>
+    <input type="radio" name="rating" id="rating_1" value="*" />
+    <label for="rating_1">*</label>
+    <input type="radio" name="rating" id="rating_2" value="**" />
+    <label for="rating_2">**</label>
+    <input type="radio" name="rating" id="rating_3" value="***" />
+    <label for="rating_3">***</label>
+    <input type="radio" name="rating" id="rating_4" value="****" />
+    <label for="rating_4">****</label>
+    <input type="radio" name="rating" id="rating_5" value="*****" />
+    <label for="rating_5">*****</label>
+  </p>
+  <!--
+  FIXING FLAW 1: CSRF
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+  -->
+  <input type="submit" value="Add game" />
+</form>
+{% endblock %}
